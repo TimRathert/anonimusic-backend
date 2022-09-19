@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const { Post } = require('../models')
+const cloudinary = require('cloudinary').v2;
+
+// cloudinary.config({
+//   secure: true,
+// })
 
 //get all
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   try {
     res.json(await Post.find({}))
   }
@@ -13,37 +18,48 @@ router.get('/', async (req, res, next) => {
 })
 
 //new post
-router.post('/', async (req, res, next) => {
-  const url = 'https://api.cloudinary.com/v1_1/anonimusic/video/upload'
+router.post('/', async (req, res) => {
   try {
-    //this doesn't work
-    const newFile = await fetch(url, {
-      method: 'POST',
-      file: `${req.body}`,
-      upload_preset: 'test-value',
-      folder: 'Anonimusic',
-      signature: 'beans',
-      headers:{
-        authorization: Basic '499475411112339:o8Yz0ZJ3YJkzCmqx1MI8jXnlLZA'
-      }
-
-    }
-      
-    );
-    const data = await response.json();
-    console.log(data)
-    
-   /*  const newPost =  {
-      ...req.body,
-      user: 'figure out auth',
-      file: 'file path',
-
-  } */
-)
+    res.json(await Post.create(req.body));
+  }
+  catch (err) {
+    res.status(400).json(err)
+  }
+})
 
 // get specific post
+router.get(':id', async (req, res) => {
+  try{
+    res.json(await Post.findById(req.params.id));
+  }
+  catch (err) {
+    res.status(400).json(err)
+  }
+})
 
 // update post
+router.put('/:id', async (req, res) => {
+  try {
+    res.json(await Post.findByIdAndUpdate(
+      req.params.id, 
+      req.body,
+      {new: true}
+      ));
+  }
+  catch (err) {
+    res.status(400).json(err)
+  }
+})
 
 // delete post
 
+router.delete('/:id', async (req, res, next) => {
+  try {
+    res.json(await Post.findByIdAndUpdate(req.params.id));
+  }
+  catch (err) {
+    res.status(400).json(err)
+  }
+})
+
+module.exports = router;
