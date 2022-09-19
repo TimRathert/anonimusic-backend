@@ -1,0 +1,27 @@
+{
+  "name": "anonimusic_backend",
+  "version": "1.0.0",
+  "description": "Anonimusic Backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hspinks2692/Anonimusic_Backend.git"
+  },
+  "author": "Ben, Harvey, Tim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hspinks2692/Anonimusic_Backend/issues"
+  },
+  "homepage": "https://github.com/hspinks2692/Anonimusic_Backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.1",
+    "morgan": "^1.10.0"
+  }
+}
