@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const db = require('../models');
 const { Post } = require('../models')
-const cloudinary = require('cloudinary').v2;
 
-// cloudinary.config({
-//   secure: true,
-// })
+router.use(express.json())
+router.use(express.urlencoded({ extended: false }))
+
 
 //get all
 router.get('/', async (req, res) => {
@@ -20,7 +20,8 @@ router.get('/', async (req, res) => {
 //new post
 router.post('/', async (req, res) => {
   try {
-    res.json(await Post.create(req.body));
+    const data = { ...req.body}
+    res.json(await db.Post.create(data));
   }
   catch (err) {
     res.status(400).json(err)
@@ -28,9 +29,9 @@ router.post('/', async (req, res) => {
 })
 
 // get specific post
-router.get(':id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try{
-    res.json(await Post.findById(req.params.id));
+    res.json(await db.Post.findById(req.params.id));
   }
   catch (err) {
     res.status(400).json(err)
@@ -40,7 +41,7 @@ router.get(':id', async (req, res) => {
 // update post
 router.put('/:id', async (req, res) => {
   try {
-    res.json(await Post.findByIdAndUpdate(
+    res.json(await db.Post.findByIdAndUpdate(
       req.params.id, 
       req.body,
       {new: true}
@@ -55,7 +56,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    res.json(await Post.findByIdAndUpdate(req.params.id));
+    res.json(await db.Post.findByIdAndUpdate(req.params.id));
   }
   catch (err) {
     res.status(400).json(err)

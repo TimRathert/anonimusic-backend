@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema ({
     user:{type: String, required:true},
-    post:{type: String, required:true},
-    timestamp: Date
-});
+    post:{type: String, required:true}
+},
+     {timestamps: true }
+);
 
 const PostSchema = new mongoose.Schema ({
     user:{type: String, required:true},
@@ -12,9 +13,9 @@ const PostSchema = new mongoose.Schema ({
     description:{type: String},
     file:{type: String, required: true},
     tags: [String],
-    comments: [commentSchema],
-    timestamp: Date
-});
+    comments: [commentSchema]
+},
+    { timestamps: true });
 
 const Post = mongoose.model('Post', PostSchema)
 
