@@ -9,7 +9,7 @@ const commentSchema = new mongoose.Schema ({
 const PostSchema = new mongoose.Schema ({
     user:{type: String, required:true},
     title:{type: String, required:true},
-    post:{type: String, required:true},
+    description:{type: String},
     file:{type: String, required: true},
     tags: [String],
     comments: [commentSchema],
