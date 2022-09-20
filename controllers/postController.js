@@ -20,7 +20,11 @@ router.get('/', async (req, res) => {
 //new post
 router.post('/', async (req, res) => {
   try {
-    const data = { ...req.body}
+    const data = { 
+      ...req.body,
+      user: 'test-user',
+      
+    }
     res.json(await db.Post.create(data));
   }
   catch (err) {
