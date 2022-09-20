@@ -21,8 +21,10 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const data = { 
-      ...req.body,   
+      ...req.body,
     }
+    data.tags = data.tags.split(' ')
+    console.log(data)
     res.json(await db.Post.create(data));
   }
   catch (err) {
