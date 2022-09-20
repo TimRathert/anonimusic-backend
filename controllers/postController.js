@@ -21,9 +21,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const data = { 
-      ...req.body,
-      user: 'test-user',
-      
+      ...req.body,   
     }
     res.json(await db.Post.create(data));
   }
