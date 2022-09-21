@@ -45,15 +45,52 @@ router.get('/:id', async (req, res) => {
 // update post
 router.put('/:id', async (req, res) => {
   try {
+    const data = {
+      ...req.body,
+    }
     res.json(await db.Post.findByIdAndUpdate(
-      req.params.id, 
-      req.body,
+      req.params.id,
+      data,
       {new: true}
       ));
   }
   catch (err) {
     res.status(400).json(err)
   }
+})
+
+// new comment post
+router.put('/:id/comment', async (req, res) => {
+  try{
+    const oldData = await db.Post.findById(req.params.id);
+    
+    const data = {
+      comments: [...oldData.comments, req.body]
+
+    }
+    res.json( await db.Post.findByIdAndUpdate(req.params.id, data, {new: true}))
+  
+    }
+
+    
+  catch(err){
+    res.status(400).json(err)
+  }
+  
+  
+  /* try {
+    const data = {
+      ...req.body,
+    }
+    res.json(await db.Post.findByIdAndUpdate(
+      req.params.id,
+      data,
+      {new: true}
+      ));
+  }
+  catch (err) {
+    res.status(400).json(err)
+  } */
 })
 
 // delete post
