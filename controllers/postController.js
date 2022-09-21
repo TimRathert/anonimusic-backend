@@ -10,7 +10,7 @@ router.use(express.urlencoded({ extended: false }))
 //get all
 router.get('/', async (req, res) => {
   try {
-    res.json(await Post.find({}))
+    res.json(await Post.find({},null,{sort: { createdAt: -1 }}))
   }
   catch (e) {
     console.log(e)
@@ -69,28 +69,10 @@ router.put('/:id/comment', async (req, res) => {
 
     }
     res.json( await db.Post.findByIdAndUpdate(req.params.id, data, {new: true}))
-  
-    }
-
-    
+    } 
   catch(err){
     res.status(400).json(err)
   }
-  
-  
-  /* try {
-    const data = {
-      ...req.body,
-    }
-    res.json(await db.Post.findByIdAndUpdate(
-      req.params.id,
-      data,
-      {new: true}
-      ));
-  }
-  catch (err) {
-    res.status(400).json(err)
-  } */
 })
 
 // delete post
