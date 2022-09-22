@@ -79,7 +79,7 @@ router.put('/:id/comment', async (req, res) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    res.json(await db.Post.findByIdAndUpdate(req.params.id));
+    res.json(await db.Post.findByIdAndDelete(req.params.id));
   }
   catch (err) {
     res.status(400).json(err)
