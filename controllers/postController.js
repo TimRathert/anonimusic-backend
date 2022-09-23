@@ -65,7 +65,10 @@ router.put('/:id/comment', async (req, res) => {
     const oldData = await db.Post.findById(req.params.id);
     
     const data = {
-      comments: [...oldData.comments, req.body]
+      comments: 
+      [...oldData.comments,
+        req.body
+      ]
 
     }
     res.json( await db.Post.findByIdAndUpdate(req.params.id, data, {new: true}))

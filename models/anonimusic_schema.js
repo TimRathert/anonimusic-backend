@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema ({
     user:{type: String, required:true},
-    post:{type: String, required:true}
+    post:{type: String, required:true},
+    timestamp: {type: Date, required: true} 
 },
-     {timestamps: true }
 );
 
 const PostSchema = new mongoose.Schema ({
